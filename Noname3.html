@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+ <head >
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+	li{list-style:none;}
+	body,html{
+		height:100%;	
+	}
+	body{
+		perspective:800px;
+		background:#000;
+		overflow:hidden;
+	}
+	#boz{
+		width:100px;
+		height:150px;
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%,-65%) rotateX(-10deg) rotateY(0deg);
+		transform-style:preserve-3d;
+	}
+	#boz ul li{
+		position:absolute;
+		top:0;
+		left:0;
+		width:100px;
+		height:150px;
+		border-radius:3px;
+		overflow:hidden;
+		box-shadow:0 0 5px #ff66ff;
+		-webkit-box-reflect:below 5px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,.5) 100%);
+	}
+	#boz ul li img{
+		width:100px;
+		height:150px;
+	}
+	#boz p{
+		width:1200px;
+		height:1200px;
+		background:-webkit-radial-gradient(center,600px 600px ,rgba(155,100,100,.5),rgba(0,0,0,0));
+		position:absolute;
+		top:100%;
+		left:50%;
+		margin-top:-600px;
+		margin-left:-600px;
+		transform:rotateX(90deg);		
+	}	
+  </style>
+ </head>
+ <body onselectstart = "return false">
+ <div id="boz">
+	<ul>
+		<li><img src="img/img/1.jpg" alt="" ondragstart='return false'></li>
+		<li><img src="img/img/2.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/3.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/4.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/5.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/6.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/7.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/8.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/9.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/10.jpg" alt="" ondragstart='return false' /></li>
+		<li><img src="img/img/11.jpg" alt="" ondragstart='return false' /></li>
+	</ul>
+	<p></p>
+ </div>
+  <script type="text/javascript">
+	var oBoz = document.getElementById('boz');
+	var aLi = oBoz.getElementsByTagName('li');
+	var length = aLi.length;
+	var Deg = 360/11;
+	for (var i=0;i<length ;i++ )
+	{
+		aLi[i].style.transform = 'rotateY('+ i*Deg +'deg) translateZ(350px)';
+	};
+	var rox = 10,roy = 0;
+	var sX ,sY ,nX,nY,x_,y_;
+	document.onmousedown = function(e){
+		e = e||event;
+		sX = e.pageX;
+		sY = e.pageY;
+		this.onmousemove = function(e){			
+			e = e||event;
+			nX = e.pageX;
+			nY = e.pageY;
+			x_ = (nX-sX)*.2;
+			y_ = (nY-sY)*.2;
+			oBoz.style.transform = 'translate(-50%,-65%) rotateX('+(rox-y_)+'deg) rotateY('+(roy+x_)+'deg)';
+		};
+		this.onmouseup = function(){
+			rox = rox-y_;
+			roy = roy+x_;
+			this.onmousemove = null;		
+		};
+	};
+  </script>
+ </body>
+</html>
